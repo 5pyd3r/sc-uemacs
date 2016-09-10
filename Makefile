@@ -18,7 +18,7 @@ uemacs.boot : uemacs.so
              | ${Scheme}
 
 uemacs : main.o uemacs.o
-	$(CC) $(LDFLAGS) -o uemacs $^ ../chezscheme/ta6le/boot/ta6le/kernel.o 
+	$(CC) -o uemacs $^ ../chezscheme/ta6le/boot/ta6le/kernel.o $(LDFLAGS)
 
 .ss.so:
 	echo '(compile-file "$^")' | $(Scheme)
