@@ -1,0 +1,8 @@
+!.gitignore
+!*.ss
+!*.c
+!Makefile
+uemacs
+uemacs.boot
+*.so
+*.o
