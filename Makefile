@@ -1,5 +1,6 @@
 CC=gcc
-CFLAGS=-I/usr/lib/csv9.4.1/ta6le/ 
+arch=$(shell echo "(printf (symbol->string (machine-type)))" | scheme -q)
+CFLAGS=-I/usr/lib/csv9.4.1/$(arch)/ 
 LDFLAGS=-lm -lpthread -ldl -lcurses
 
 src=uemacs.ss
@@ -18,7 +19,7 @@ uemacs.boot : uemacs.so
              | ${Scheme}
 
 uemacs : main.o uemacs.o
-	$(CC) -o uemacs $^ ../chezscheme/ta6le/boot/ta6le/kernel.o $(LDFLAGS)
+	$(CC) -o uemacs $^ ../chezscheme/$(arch)/boot/$(arch)/kernel.o $(LDFLAGS)
 
 .ss.so:
 	echo '(compile-file "$^")' | $(Scheme)
@@ -28,7 +29,7 @@ uemacs : main.o uemacs.o
 
 install : uemacs.boot uemacs
 	install -m 555 uemacs /usr/bin/uemacs
-	install -m 444 uemacs.boot /usr/lib/csv9.4.1/ta6le/uemacs.boot
+	install -m 444 uemacs.boot /usr/lib/csv9.4.1/$(arch)/uemacs.boot
 
 clean :
 	rm -f *.o
